@@ -1,4 +1,5 @@
 const cameraButton = document.getElementById("cameraButton");
+const switchCameraButton = document.getElementById("switchCameraButton");
 const takePhotoButton = document.getElementById("takePhotoButton");
 
 const camera = document.getElementById("camera");
@@ -7,6 +8,10 @@ const photoList = document.getElementById("photoList");
 
 let cameraStream = null;
 
+// 現在使用しているカメラ
+// "user" = 内カメラ
+// "environment" = 外カメラ
+let cameraFacingMode = "user";
 
 // ==========================
 // 設定
@@ -57,7 +62,9 @@ cameraButton.addEventListener("click", async () => {
     try {
 
         cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: true
+            video: {
+                facingMode: cameraFacingMode
+            }
         });
 
         camera.srcObject = cameraStream;
@@ -71,6 +78,51 @@ cameraButton.addEventListener("click", async () => {
 
 });
 
+// ==========================
+// カメラを切り替える
+// ==========================
+
+switchCameraButton.addEventListener("click", async () => {
+
+    // カメラが起動していなければ何もしない
+    if (!cameraStream) {
+
+        alert("先にカメラを起動してください。");
+        return;
+
+    }
+
+    // 現在のカメラを停止
+    cameraStream.getTracks().forEach((track) => {
+        track.stop();
+    });
+
+    // 内カメラと外カメラを切り替える
+    if (cameraFacingMode === "user") {
+        cameraFacingMode = "environment";
+    } else {
+        cameraFacingMode = "user";
+    }
+
+    try {
+
+        // 新しいカメラを起動
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: cameraFacingMode
+            }
+        });
+
+        camera.srcObject = cameraStream;
+
+    } catch (error) {
+
+        alert("カメラを切り替えられませんでした。");
+        console.error(error);
+
+    }
+
+});
 
 // ==========================
 // 写真を撮影する
