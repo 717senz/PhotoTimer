@@ -1,4 +1,4 @@
-const CACHE_NAME = "photo-timer-v2";
+const CACHE_NAME = "photo-timer-v3";
 
 const FILES_TO_CACHE = [
     "./",
@@ -21,6 +21,9 @@ self.addEventListener("install", (event) => {
         })
 
     );
+
+    // 新しいService Workerをすぐに有効にする
+    self.skipWaiting();
 
 });
 
@@ -49,6 +52,9 @@ self.addEventListener("activate", (event) => {
         })
 
     );
+
+    // 開いているページにも新しいService Workerを適用
+    self.clients.claim();
 
 });
 
