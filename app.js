@@ -76,20 +76,34 @@ cameraButton.addEventListener("click", async () => {
 // 写真を撮影する
 // ==========================
 
-takePhotoButton.addEventListener("click", () => {
+takePhotoButton.addEventListener("click", async () => {
 
     if (!cameraStream) {
-
         alert("先にカメラを起動してください。");
         return;
+    }
+
+    // カメラの映像サイズが取得できるまで少し待つ
+    if (camera.videoWidth === 0 || camera.videoHeight === 0) {
+
+        await new Promise((resolve) => {
+            camera.addEventListener("loadedmetadata", resolve, {
+                once: true
+            });
+        });
 
     }
 
-    // カメラ映像のサイズを取得
+    // カメラ映像のサイズを設定
     canvas.width = camera.videoWidth;
     canvas.height = camera.videoHeight;
 
-    // カメラ映像をキャンバスにコピー
+    if (canvas.width === 0 || canvas.height === 0) {
+        alert("カメラ映像を取得できませんでした。");
+        return;
+    }
+
+    // カメラ映像を写真としてキャンバスにコピー
     const context = canvas.getContext("2d");
 
     context.drawImage(
@@ -103,13 +117,18 @@ takePhotoButton.addEventListener("click", () => {
     // JPEG画像に変換
     canvas.toBlob((blob) => {
 
+        if (!blob) {
+            alert("写真を作成できませんでした。");
+            return;
+        }
+
         // 撮影日時
         const timestamp = Date.now();
 
-        // 写真を保存
+        // データベースに保存
         savePhoto(blob, timestamp);
 
-    }, "image/jpeg");
+    }, "image/jpeg", 0.9);
 
 });
 
