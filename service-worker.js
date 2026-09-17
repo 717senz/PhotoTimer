@@ -1,4 +1,4 @@
-const CACHE_NAME = "photo-timer-v1";
+const CACHE_NAME = "photo-timer-v2";
 
 const FILES_TO_CACHE = [
     "./",
