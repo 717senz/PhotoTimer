@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="manifest.json">
+
+    <title>Photo Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Photo Timer</h1>
+
+    <video id="camera" autoplay playsinline></video>
+
+    <br>
+
+    <button id="cameraButton">
+        📷 カメラを起動
+    </button>
+
+    <button id="takePhotoButton">
+        📸 撮影する
+    </button>
+
+    <canvas id="photoCanvas"></canvas>
+
+    <h2>撮影した写真</h2>
+
+    <div id="photoList"></div>
+
+    <p>保存期間：7日</p>
+
+    <script src="app.js"></script>
+
+    <script>
+
+    if ("serviceWorker" in navigator) {
+
+        navigator.serviceWorker.register("service-worker.js");
+
+    }
+
+    </script>
+    
+</body>
+</html>

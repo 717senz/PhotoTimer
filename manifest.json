@@ -1,0 +1,9 @@
+{
+    "name": "Photo Timer",
+    "short_name": "PhotoTimer",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": []
+}

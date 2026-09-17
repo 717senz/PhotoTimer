@@ -1,0 +1,33 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    background: black;
+}
+
+button {
+    font-size: 18px;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border-radius: 10px;
+}
+
+canvas {
+    display: none;
+}
+
+#photoList img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+}
