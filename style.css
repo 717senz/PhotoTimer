@@ -1,33 +1,167 @@
 body {
+
     font-family: sans-serif;
+
     text-align: center;
+
     padding: 20px;
+
 }
+
+
+/* ==========================
+   タイトル
+========================== */
 
 h1 {
+
     font-size: 32px;
+
 }
+
+
+/* ==========================
+   タブ
+========================== */
+
+.tabs {
+
+    display: flex;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #ccc;
+
+}
+
+
+.tab {
+
+    flex: 1;
+
+    font-size: 18px;
+
+    padding: 12px;
+
+    margin: 0;
+
+    border: none;
+
+    border-radius: 0;
+
+    background: #eee;
+
+}
+
+
+.tab.active {
+
+    background: #333;
+
+    color: white;
+
+}
+
+
+/* ==========================
+   ページ
+========================== */
+
+.page {
+
+    display: none;
+
+}
+
+
+.page.active {
+
+    display: block;
+
+}
+
+
+/* ==========================
+   カメラ
+========================== */
 
 video {
+
     width: 100%;
+
     max-width: 500px;
+
     border-radius: 10px;
+
     background: black;
+
 }
+
+
+/* ==========================
+   ボタン
+========================== */
 
 button {
+
     font-size: 18px;
+
     padding: 12px 20px;
+
     margin: 10px 5px;
+
     border-radius: 10px;
+
 }
+
+
+/* ==========================
+   Canvas
+========================== */
 
 canvas {
+
     display: none;
+
 }
 
+
+/* ==========================
+   写真
+========================== */
+
 #photoList img {
+
     width: 200px;
+
     margin: 10px;
+
     border-radius: 10px;
+
+}
+
+
+/* ==========================
+   写真1枚分
+========================== */
+
+#photoList > div {
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ==========================
+   設定
+========================== */
+
+#settings {
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #ccc;
+
 }
