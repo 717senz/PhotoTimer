@@ -17,12 +17,21 @@ let cameraFacingMode = "user";
 // 設定
 // ==========================
 
-// 写真の保存期間：7日
-const SAVE_DAYS = 7;
+// ==========================
+// 保存期間の設定
+// ==========================
 
-// 7日をミリ秒に変換
-const SAVE_TIME = SAVE_DAYS * 24 * 60 * 60 * 1000;
+// 初期設定：7日
+const DEFAULT_SAVE_DAYS = 7;
 
+// 保存期間を取得
+let SAVE_DAYS = Number(
+    localStorage.getItem("saveDays")
+) || DEFAULT_SAVE_DAYS;
+
+// 保存期間をミリ秒に変換
+let SAVE_TIME =
+    SAVE_DAYS * 24 * 60 * 60 * 1000;
 
 // ==========================
 // データベースを作る
@@ -343,3 +352,66 @@ function deleteExpiredPhotos() {
     };
 
 }
+
+// ==========================
+// 保存期間変更
+// ==========================
+
+const saveDaysInput =
+    document.getElementById("saveDaysInput");
+
+const saveDaysButton =
+    document.getElementById("saveDaysButton");
+
+const saveDaysText =
+    document.getElementById("saveDaysText");
+
+
+// 現在の保存期間を表示
+saveDaysInput.value = SAVE_DAYS;
+
+saveDaysText.textContent =
+    `現在の保存期間：${SAVE_DAYS}日`;
+
+
+// 保存期間変更ボタン
+saveDaysButton.addEventListener("click", () => {
+
+    const newDays =
+        Number(saveDaysInput.value);
+
+    // 入力チェック
+    if (
+        !Number.isInteger(newDays) ||
+        newDays < 1
+    ) {
+
+        alert("1日以上の整数を入力してください。");
+        return;
+
+    }
+
+    // 保存期間を更新
+    SAVE_DAYS = newDays;
+
+    SAVE_TIME =
+        SAVE_DAYS * 24 * 60 * 60 * 1000;
+
+    // iPhoneに設定を保存
+    localStorage.setItem(
+        "saveDays",
+        SAVE_DAYS
+    );
+
+    // 表示を更新
+    saveDaysText.textContent =
+        `現在の保存期間：${SAVE_DAYS}日`;
+
+    // 変更後、期限切れ写真を削除
+    deleteExpiredPhotos();
+
+    alert(
+        `保存期間を${SAVE_DAYS}日に変更しました。`
+    );
+
+});
