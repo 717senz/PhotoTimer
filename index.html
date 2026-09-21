@@ -36,7 +36,26 @@
 
     <div id="photoList"></div>
 
-    <p>保存期間：7日</p>
+<div id="settings">
+
+    <h2>保存期間</h2>
+
+    <input
+        type="number"
+        id="saveDaysInput"
+        min="1"
+        step="1"
+    >
+
+    <span>日</span>
+
+    <button id="saveDaysButton">
+        保存期間を変更
+    </button>
+
+</div>
+
+<p id="saveDaysText"></p>
 
     <script src="app.js"></script>
 
