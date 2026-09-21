@@ -240,13 +240,58 @@ function loadPhotos() {
 
         photos.forEach((photo) => {
 
+            // 写真を入れる箱
+            const container = document.createElement("div");
+
+            // 写真
             const image = document.createElement("img");
 
             image.src = URL.createObjectURL(photo.image);
 
-            photoList.appendChild(image);
+            // 削除ボタン
+            const deleteButton = document.createElement("button");
+
+            deleteButton.textContent = "🗑️ 削除";
+
+            deleteButton.addEventListener("click", () => {
+
+                deletePhoto(photo.id);
+
+            });
+
+            // 箱に写真とボタンを入れる
+            container.appendChild(image);
+            container.appendChild(deleteButton);
+
+            // 画面に追加
+            photoList.appendChild(container);
 
         });
+
+    };
+
+}
+
+
+// ==========================
+// 写真を1枚削除する
+// ==========================
+
+function deletePhoto(photoId) {
+
+    const transaction = db.transaction(
+        ["photos"],
+        "readwrite"
+    );
+
+    const store = transaction.objectStore("photos");
+
+    store.delete(photoId);
+
+    transaction.oncomplete = () => {
+
+        // 削除後に写真一覧を更新
+        loadPhotos();
 
     };
 
