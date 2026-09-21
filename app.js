@@ -1,3 +1,43 @@
+// ==========================
+// タブ切り替え
+// ==========================
+
+const cameraTab =
+    document.getElementById("cameraTab");
+
+const photoTab =
+    document.getElementById("photoTab");
+
+const cameraPage =
+    document.getElementById("cameraPage");
+
+const photoPage =
+    document.getElementById("photoPage");
+
+
+// 撮影タブ
+cameraTab.addEventListener("click", () => {
+
+    cameraTab.classList.add("active");
+    photoTab.classList.remove("active");
+
+    cameraPage.classList.add("active");
+    photoPage.classList.remove("active");
+
+});
+
+
+// 写真タブ
+photoTab.addEventListener("click", () => {
+
+    photoTab.classList.add("active");
+    cameraTab.classList.remove("active");
+
+    photoPage.classList.add("active");
+    cameraPage.classList.remove("active");
+
+});
+
 const cameraButton = document.getElementById("cameraButton");
 const switchCameraButton = document.getElementById("switchCameraButton");
 const takePhotoButton = document.getElementById("takePhotoButton");
@@ -11,7 +51,7 @@ let cameraStream = null;
 // 現在使用しているカメラ
 // "user" = 内カメラ
 // "environment" = 外カメラ
-let cameraFacingMode = "user";
+let cameraFacingMode = "environment";
 
 // ==========================
 // 設定
