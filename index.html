@@ -1,73 +1,141 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="manifest" href="manifest.json">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
 
     <title>Photo Timer</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
     <h1>Photo Timer</h1>
 
-    <video id="camera" autoplay playsinline></video>
 
-    <br>
+    <!-- ==========================
+         タブ
+    =========================== -->
 
-    <button id="cameraButton">
-    📷 カメラを起動
-    </button>
+    <div class="tabs">
 
-    <button id="switchCameraButton">
-    🔄 カメラ切替
-    </button>
+        <button
+            id="cameraTab"
+            class="tab active"
+        >
+            📷 撮影
+        </button>
 
-    <button id="takePhotoButton">
-    📸 撮影する
-    </button>
+        <button
+            id="photoTab"
+            class="tab"
+        >
+            🖼️ 写真
+        </button>
 
-    <canvas id="photoCanvas"></canvas>
+    </div>
 
-    <h2>撮影した写真</h2>
 
-    <div id="photoList"></div>
+    <!-- ==========================
+         撮影画面
+    =========================== -->
 
-<div id="settings">
+    <div id="cameraPage" class="page active">
 
-    <h2>保存期間</h2>
+        <video
+            id="camera"
+            autoplay
+            playsinline
+        ></video>
 
-    <input
-        type="number"
-        id="saveDaysInput"
-        min="1"
-        step="1"
-    >
+        <br>
 
-    <span>日</span>
+        <button id="cameraButton">
+            📷 カメラを起動
+        </button>
 
-    <button id="saveDaysButton">
-        保存期間を変更
-    </button>
+        <button id="switchCameraButton">
+            🔄 カメラ切替
+        </button>
 
-</div>
+        <button id="takePhotoButton">
+            📸 撮影する
+        </button>
 
-<p id="saveDaysText"></p>
+        <canvas id="photoCanvas"></canvas>
+
+    </div>
+
+
+    <!-- ==========================
+         写真一覧画面
+    =========================== -->
+
+    <div id="photoPage" class="page">
+
+        <h2>撮影した写真</h2>
+
+        <div id="photoList"></div>
+
+
+        <!-- 保存期間 -->
+
+        <div id="settings">
+
+            <h2>保存期間</h2>
+
+            <input
+                type="number"
+                id="saveDaysInput"
+                min="1"
+                step="1"
+            >
+
+            <span>日</span>
+
+            <button id="saveDaysButton">
+                保存期間を変更
+            </button>
+
+            <p id="saveDaysText"></p>
+
+        </div>
+
+    </div>
+
 
     <script src="app.js"></script>
 
+
     <script>
 
-    if ("serviceWorker" in navigator) {
+        if ("serviceWorker" in navigator) {
 
-        navigator.serviceWorker.register("service-worker.js");
+            navigator.serviceWorker.register(
+                "service-worker.js"
+            );
 
-    }
+        }
 
     </script>
-    
+
 </body>
+
 </html>
